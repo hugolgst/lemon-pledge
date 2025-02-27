@@ -21,5 +21,16 @@
   "bugs": {
     "url": "https://github.com/hugolgst/lemon-pledge/issues"
   },
-  "homepage": "https://github.com/hugolgst/lemon-pledge#readme"
+  "homepage": "https://github.com/hugolgst/lemon-pledge#readme",
+  "dependencies": {
+    "@eslint/compat": "^1.2.6",
+    "@eslint/eslintrc": "^3.2.0",
+    "@eslint/js": "^9.19.0",
+    "@stylistic/eslint-plugin": "^4.1.0",
+    "eslint": "^9.19.0",
+    "eslint-config-next": "15.1.6",
+    "eslint-plugin-import": "^2.31.0",
+    "eslint-plugin-prefer-arrow": "^1.2.3",
+    "eslint-plugin-unused-imports": "^4.1.4"
+  }
 }
