@@ -1,11 +1,13 @@
 {
-  "name": "lemon-pledge",
-  "version": "1.0.0",
+  "name": "eslint-config-lemon-pledge",
+  "version": "1.0.4",
   "description": "TS/TSX base ESLint configuration ",
   "main": "index.js",
-  "type": "module",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "exports": {
+    ".": "./index.js"
   },
   "repository": {
     "type": "git",
