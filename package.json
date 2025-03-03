@@ -19,11 +19,8 @@
     "typescript",
     "lemon-pledge"
   ],
-  "author": "Hugo Lageneste",
-  "license": "ISC",
-  "bugs": {
-    "url": "https://github.com/hugolgst/lemon-pledge/issues"
-  },
+  "author": "Hugo Lageneste <hugo.lageneste@pm.me>",
+  "license": "MIT",
   "homepage": "https://github.com/hugolgst/lemon-pledge#readme",
   "dependencies": {
     "@eslint/compat": "^1.2.6",

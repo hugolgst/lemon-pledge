@@ -1,111 +1,176 @@
-const { fixupConfigRules, fixupPluginRules } = require("@eslint/compat");
+/**
+ * ESLint Configuration
+ *
+ * - Organized by plugin references
+ * - Grouped rules logically (React, TypeScript, Imports, Arrow style, Best practices, Stylistic)
+ * - Includes comments for easier maintenance
+ */
 
-const react = require("eslint-plugin-react");
-const typescriptEslint = require("@typescript-eslint/eslint-plugin");
-const preferArrow = require("eslint-plugin-prefer-arrow");
-const unusedImports = require("eslint-plugin-unused-imports");
-const importPlugin = require("eslint-plugin-import");
-const stylistic = require("@stylistic/eslint-plugin");
+const { fixupConfigRules, fixupPluginRules } = require('@eslint/compat')
+
+// Plugins
+const react = require('eslint-plugin-react')
+const typescriptEslint = require('@typescript-eslint/eslint-plugin')
+const preferArrow = require('eslint-plugin-prefer-arrow')
+const unusedImports = require('eslint-plugin-unused-imports')
+const importPlugin = require('eslint-plugin-import')
+const stylistic = require('@stylistic/eslint-plugin')
+const stylisticTs = require('@stylistic/eslint-plugin-ts')
+const stylisticJsx = require('@stylistic/eslint-plugin-jsx')
 
 module.exports = {
-  languageOptions: {
-    globals: {
-      MyGlobal: true
-    }
-  },
-
+  /**
+   * ----------------------------------------------------------------
+   * Register Plugins (alphabetically)
+   * ----------------------------------------------------------------
+   */
   plugins: {
-    "react": fixupPluginRules(react),
-    "@typescript-eslint": fixupPluginRules(typescriptEslint),
-    "prefer-arrow": preferArrow,
-    "unused-imports": unusedImports,
-    "sort-imports": importPlugin,
-    "@stylistic": stylistic
+    '@stylistic': stylistic,
+    '@stylistic/jsx': stylisticJsx,
+    '@stylistic/ts': stylisticTs,
+    '@typescript-eslint': fixupPluginRules(typescriptEslint),
+    'prefer-arrow': preferArrow,
+    'react': fixupPluginRules(react),
+    'sort-imports': importPlugin,
+    'unused-imports': unusedImports
   },
 
+  /**
+   * ----------------------------------------------------------------
+   * Extend Shared & Recommended Configurations
+   * (Removed duplicate "plugin:react/recommended")
+   * ----------------------------------------------------------------
+   */
   extends: [
-    "eslint:recommended",
-    "plugin:react/recommended",
-    "plugin:@typescript-eslint/recommended-type-checked",
-    "plugin:@typescript-eslint/stylistic-type-checked",
-    "plugin:react/recommended",
-    "plugin:react/jsx-runtime",
-    "plugin:react-hooks/recommended"
+    'eslint:recommended',
+    'plugin:react/recommended',
+    'plugin:react/jsx-runtime',
+    'plugin:react-hooks/recommended',
+    'plugin:@typescript-eslint/recommended-type-checked',
+    'plugin:@typescript-eslint/stylistic-type-checked'
   ],
 
+  /**
+   * ----------------------------------------------------------------
+   * Custom ESLint Rules
+   * ----------------------------------------------------------------
+   */
   rules: {
-    "react/prop-types": "off",
-    "@typescript-eslint/no-unused-vars": "off",
+    /**
+     * ----------------------------
+     * React-Specific Rules
+     * ----------------------------
+     */
+    'react/prop-types': 'off',
 
-    "no-restricted-imports": ["error", {
-      patterns: [".*"],
-    }],
+    /**
+     * ----------------------------
+     * TypeScript Rules
+     * ----------------------------
+     */
+    '@typescript-eslint/no-unused-vars': 'off', // We'll rely on unused-imports instead
+    '@typescript-eslint/array-type': ['error', { default: 'generic' }],
 
-    "prefer-arrow/prefer-arrow-functions": ["error", {
-      disallowPrototype: true,
-      singleReturnOnly: false,
-      classPropertiesAllowed: false
-    }],
-
-    "prefer-arrow-callback": ["error", {
-      allowNamedFunctions: true
-    }],
-
-    "func-style": ["error", "expression", {
-      allowArrowFunctions: true
-    }],
-
-    "@typescript-eslint/array-type": ["error", {
-      default: "generic"
-    }],
-
-    "no-implicit-coercion": ["error", {
-      boolean: true,
-      number: true,
-      string: true,
-      allow: []
-    }],
-
-    "unused-imports/no-unused-imports": "error",
-
-    "unused-imports/no-unused-vars": ["error", {
-      vars: "all",
-      varsIgnorePattern: "^_",
-      args: "after-used",
-      argsIgnorePattern: "^_"
-    }],
-
-    "sort-imports/order": [
-      "error",
+    /**
+     * ----------------------------
+     * Import / Unused Rules
+     * ----------------------------
+     */
+    'no-restricted-imports': ['error', { patterns: ['.*'] }],
+    'unused-imports/no-unused-imports': 'error',
+    'unused-imports/no-unused-vars': [
+      'error',
       {
-        "groups": ["builtin", "external", "internal", "parent", "sibling", "index"],
-        "alphabetize": { "order": "asc", "caseInsensitive": true },
-        "newlines-between": "always"
+        vars: 'all',
+        varsIgnorePattern: '^_',
+        args: 'after-used',
+        argsIgnorePattern: '^_'
+      }
+    ],
+    'sort-imports/order': [
+      'error',
+      {
+        groups: ['builtin', 'external', 'internal', 'parent', 'sibling', 'index'],
+        alphabetize: { order: 'asc', caseInsensitive: true },
+        'newlines-between': 'always'
+      }
+    ],
+    // Disable core sort-imports to avoid conflicts with eslint-plugin-import
+    'sort-imports': 'off',
+
+    /**
+     * ----------------------------
+     * Arrow Function Preferences
+     * ----------------------------
+     */
+    'prefer-arrow/prefer-arrow-functions': [
+      'error',
+      {
+        disallowPrototype: true,
+        singleReturnOnly: false,
+        classPropertiesAllowed: false
+      }
+    ],
+    'prefer-arrow-callback': ['error', { allowNamedFunctions: true }],
+    'func-style': [
+      'error',
+      'expression',
+      {
+        allowArrowFunctions: true
       }
     ],
 
-    "sort-imports": "off", // Disable this to avoid conflicts with import/order
+    /**
+     * ----------------------------
+     * General Best Practices
+     * ----------------------------
+     */
+    'no-implicit-coercion': [
+      'error',
+      {
+        boolean: true,
+        number: true,
+        string: true,
+        allow: []
+      }
+    ],
 
-    "@stylistic/jsx-pascal-case": ["error", {}],
-    "@stylistic/jsx-one-expression-per-line": ["error", { "allow": "single-line" }],
-    "@stylistic/jsx-closing-bracket-location": [1, "line-aligned"],
-    "@stylistic/jsx-closing-tag-location": ["error", "line-aligned"],
-    "@stylistic/jsx-curly-spacing": [2, "never"],
-    "@stylistic/jsx-equals-spacing": [2, "never"],
-    "@stylistic/jsx-quotes": ["error", "prefer-single"],
-    "@stylistic/jsx-tag-spacing": ["error", {
-      "closingSlash": "never",
-      "beforeSelfClosing": "always",
-      "afterOpening": "never",
-      "beforeClosing": "allow"
-    }],
-    "@stylistic/jsx-first-prop-new-line": ["error", "multiprop"],
-    "@stylistic/jsx-max-props-per-line": [1, { "maximum": 1 }],
-    "@stylistic/jsx-props-no-multi-spaces": "error",
-    "@stylistic/jsx-indent-props": [2, 2],
+    /**
+     * ----------------------------
+     * Stylistic Rules (via @stylistic/*)
+     * ----------------------------
+     *
+     * React/JSX styles, general code formatting, line lengths, etc.
+     */
 
-    "@stylistic/max-len": [
-      "error",
+    // -- JSX (from @stylistic/jsx)
+    '@stylistic/jsx/jsx-pascal-case': ['error', {}],
+    '@stylistic/jsx/jsx-one-expression-per-line': ['error', { allow: 'single-line' }],
+    '@stylistic/jsx/jsx-closing-bracket-location': [1, 'line-aligned'],
+    '@stylistic/jsx/jsx-closing-tag-location': ['error', 'line-aligned'],
+    '@stylistic/jsx/jsx-curly-spacing': [2, 'never'],
+    '@stylistic/jsx/jsx-equals-spacing': [2, 'never'],
+    '@stylistic/jsx-quotes': ['error', 'prefer-single'],
+    '@stylistic/jsx/jsx-tag-spacing': [
+      'error',
+      {
+        closingSlash: 'never',
+        beforeSelfClosing: 'always',
+        afterOpening: 'never',
+        beforeClosing: 'allow'
+      }
+    ],
+    '@stylistic/jsx/jsx-first-prop-new-line': ['error', 'multiprop'],
+    '@stylistic/jsx/jsx-max-props-per-line': [1, { maximum: 1, when: 'always' }],
+    '@stylistic/jsx/jsx-props-no-multi-spaces': 'error',
+    '@stylistic/jsx/jsx-indent-props': [2, 2],
+    '@stylistic/jsx/jsx-indent': ['error', 2],
+
+    // -- General stylistic
+    '@stylistic/multiline-ternary': ['error', 'always-multiline'],
+    '@stylistic/type-generic-spacing': ['error'],
+    '@stylistic/max-len': [
+      'error',
       {
         code: 100,
         tabWidth: 2,
@@ -115,34 +180,50 @@ module.exports = {
         ignoreRegExpLiterals: true
       }
     ],
-    "@stylistic/array-bracket-newline": ["error", "consistent"],
-    "@stylistic/arrow-spacing": "error",
-    "@stylistic/block-spacing": "error",
-    "@stylistic/comma-dangle": ["error", "never"],
-    "@stylistic/comma-spacing": ["error", { "before": false, "after": true }],
-    "@stylistic/curly-newline": ["error", "always"],
-    "@stylistic/function-call-spacing": ["error", "never"],
-    "@stylistic/keyword-spacing": ["error", { "before": true }],
-    "@stylistic/max-statements-per-line": ["error", { "max": 1 }],
-    "@stylistic/new-parens": "error",
-    "@stylistic/no-multi-spaces": "error",
-    "@stylistic/no-multiple-empty-lines": [
-      "error",
+    '@stylistic/arrow-spacing': 'error',
+    '@stylistic/function-call-argument-newline': ['error', 'consistent'],
+    '@stylistic/function-paren-newline': ['error', 'consistent'],
+
+    // -- TypeScript-specific stylistic
+    '@stylistic/ts/function-call-spacing': ['error', 'never'],
+    '@stylistic/ts/block-spacing': 'error',
+    '@stylistic/ts/brace-style': ['error', '1tbs'],
+    '@stylistic/ts/comma-dangle': ['error', 'never'],
+    '@stylistic/ts/comma-spacing': ['error', { before: false, after: true }],
+    '@stylistic/ts/keyword-spacing': ['error', { before: true }],
+    '@stylistic/ts/object-curly-spacing': ['error', 'always'],
+    '@stylistic/ts/object-curly-newline': [
+      'error',
       {
-        "max": 1,
-        "maxEOF": 0,
-        "maxBOF": 0
+        ObjectExpression: { multiline: true, consistent: true },
+        ObjectPattern: { multiline: true },
+        ImportDeclaration: 'never'
       }
     ],
-    "@stylistic/no-trailing-spaces": "error",
-    "@stylistic/no-whitespace-before-property": "error",
-    "@stylistic/nonblock-statement-body-position": ["error", "beside"],
-    "@stylistic/object-curly-spacing": ["error", "always"],
-    "@stylistic/array-bracket-spacing": ["error", "always"],
-    "@stylistic/indent": ["error", 2],
-    "@stylistic/linebreak-style": ["error", "unix"],
-    "@stylistic/quotes": ["error", "single"],
-    "@stylistic/semi": ["error", "never"],
-    "@stylistic/spaced-comment": ["error", "always", { "markers": ["/"] }]
+    '@stylistic/ts/indent': ['error', 2],
+    '@stylistic/ts/quotes': ['error', 'single'],
+    '@stylistic/ts/semi': ['error', 'never'],
+    '@stylistic/ts/type-annotation-spacing': 'error',
+
+    // -- Other stylistic
+    '@stylistic/max-statements-per-line': ['error', { max: 1 }],
+    '@stylistic/new-parens': 'error',
+    '@stylistic/no-multi-spaces': 'error',
+    '@stylistic/no-multiple-empty-lines': [
+      'error',
+      {
+        max: 1,   // at most 1 consecutive empty line
+        maxEOF: 0, // no empty lines at the end of file
+        maxBOF: 0  // no empty lines at the beginning of file
+      }
+    ],
+    '@stylistic/nonblock-statement-body-position': ['error', 'beside'],
+    '@stylistic/array-bracket-newline': ['error', 'consistent'],
+    '@stylistic/array-bracket-spacing': ['error', 'always'],
+    '@stylistic/array-element-newline': ['error', 'consistent'],
+    '@stylistic/no-trailing-spaces': 'error',
+    '@stylistic/no-whitespace-before-property': 'error',
+    '@stylistic/linebreak-style': ['error', 'unix'],
+    '@stylistic/spaced-comment': ['error', 'always', { markers: ['/'] }]
   }
-};
+}
