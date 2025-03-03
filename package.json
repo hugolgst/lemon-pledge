@@ -1,6 +1,6 @@
 {
   "name": "lemon-pledge",
-  "version": "1.0.26",
+  "version": "1.1.0",
   "description": "TS/TSX base ESLint configuration ",
   "type": "module",
   "main": "index.mjs",

@@ -2,6 +2,21 @@
 
 A shareable ESLint configuration that leverages TypeScript, React, and [Stylistic ESLint Plugins](https://github.com/ota-meshi/eslint-plugin-stylistic). This config aims for clean, consistent, and modern code style.
 
+```
+npm i lemon-pledge
+```
+
+```js
+import lemonPledge from 'lemon-pledge'
+export default [
+  lemonPledge.configs.default // Standard JS
+  // OR
+  lemonPledge.configs.typed // TypeScript
+  // OR
+  lemonPledge.configs['typed-react'] // TypeScript + React
+]
+```
+
 ## Features
 
 - **React**: Includes [`eslint-plugin-react`](https://github.com/jsx-eslint/eslint-plugin-react) and [`react-hooks`](https://www.npmjs.com/package/eslint-plugin-react-hooks).
