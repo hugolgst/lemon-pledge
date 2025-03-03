@@ -1,4 +1,4 @@
-
+![Frame 14](https://github.com/user-attachments/assets/b7205f89-5816-480d-add2-31068bf18349)
 
 A shareable ESLint configuration that leverages TypeScript, React, and [Stylistic ESLint Plugins](https://github.com/ota-meshi/eslint-plugin-stylistic). This config aims for clean, consistent, and modern code style.
 
