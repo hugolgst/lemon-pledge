@@ -1,6 +1,6 @@
 {
   "name": "lemon-pledge",
-  "version": "1.1.1",
+  "version": "1.1.2",
   "description": "lemon-pledge is a JS/TS/React eslint strict opinionated configuration.",
   "type": "module",
   "main": "index.mjs",

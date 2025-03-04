@@ -258,6 +258,7 @@ const createConfig = ({ typescript = true, react: useReact = true }) => {
           ImportDeclaration: 'never'
         }
       ],
+      '@stylistic/object-property-newline': [ 'error', { 'allowAllPropertiesOnSameLine': true } ],
 
       // Basic code style
       '@stylistic/ts/indent': [ 'error', 2 ],
