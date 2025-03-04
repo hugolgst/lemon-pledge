@@ -5,6 +5,7 @@ import stylisticJsx from '@stylistic/eslint-plugin-jsx'
 import stylisticTs from '@stylistic/eslint-plugin-ts'
 import typescriptEslint from '@typescript-eslint/eslint-plugin'
 import importPlugin from 'eslint-plugin-import'
+import newlineDestructuring from 'eslint-plugin-newline-destructuring'
 import preferArrow from 'eslint-plugin-prefer-arrow'
 import react from 'eslint-plugin-react'
 import reactHooks from 'eslint-plugin-react-hooks'
@@ -35,7 +36,8 @@ const createConfig = ({ typescript = true, react: useReact = true }) => {
     'prefer-arrow': preferArrow,
     react: fixupPluginRules(react),
     'sort-imports': importPlugin,
-    'unused-imports': unusedImports
+    'unused-imports': unusedImports,
+    'newline-destructuring': newlineDestructuring
   }
 
   const rules = {}
@@ -259,6 +261,12 @@ const createConfig = ({ typescript = true, react: useReact = true }) => {
         }
       ],
       '@stylistic/object-property-newline': [ 'error', { 'allowAllPropertiesOnSameLine': true } ],
+      'newline-destructuring/newline': [ 'error', {
+        allowAllPropertiesOnSameLine: true,
+        consistent: true,
+        maxLength: 100,
+        items: 5
+      } ],
 
       // Basic code style
       '@stylistic/ts/indent': [ 'error', 2 ],

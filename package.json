@@ -1,6 +1,6 @@
 {
   "name": "lemon-pledge",
-  "version": "1.1.2",
+  "version": "1.1.4",
   "description": "lemon-pledge is a JS/TS/React eslint strict opinionated configuration.",
   "type": "module",
   "main": "index.mjs",
@@ -29,6 +29,7 @@
     "@stylistic/eslint-plugin-ts": "^4.2.0",
     "eslint-config-next": "15.1.6",
     "eslint-plugin-import": "^2.31.0",
+    "eslint-plugin-newline-destructuring": "^1.2.2",
     "eslint-plugin-prefer-arrow": "^1.2.3",
     "eslint-plugin-react-hooks": "^5.2.0",
     "eslint-plugin-unused-imports": "^4.1.4",
