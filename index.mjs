@@ -4,6 +4,7 @@ import stylistic from '@stylistic/eslint-plugin'
 import stylisticJsx from '@stylistic/eslint-plugin-jsx'
 import stylisticTs from '@stylistic/eslint-plugin-ts'
 import typescriptEslint from '@typescript-eslint/eslint-plugin'
+import chakraUiPlugin from 'eslint-plugin-chakra-ui'
 import importPlugin from 'eslint-plugin-import'
 import newlineDestructuring from 'eslint-plugin-newline-destructuring'
 import preferArrow from 'eslint-plugin-prefer-arrow'
@@ -37,7 +38,8 @@ const createConfig = ({ typescript = true, react: useReact = true }) => {
     react: fixupPluginRules(react),
     'sort-imports': importPlugin,
     'unused-imports': unusedImports,
-    'newline-destructuring': newlineDestructuring
+    'newline-destructuring': newlineDestructuring,
+    'chakra-ui': chakraUiPlugin
   }
 
   const rules = {}
@@ -199,6 +201,8 @@ const createConfig = ({ typescript = true, react: useReact = true }) => {
       '@stylistic/jsx/jsx-first-prop-new-line': [ 'error', 'multiprop' ],
       '@stylistic/jsx/jsx-max-props-per-line': [ 1, { maximum: 1, when: 'always' } ],
       '@stylistic/jsx/jsx-props-no-multi-spaces': 'error',
+      'chakra-ui/props-order': 'error',
+      'chakra-ui/props-shorthand': 'error',
 
       // JSX indentation
       '@stylistic/jsx/jsx-indent-props': [ 2, 2 ],
@@ -231,7 +235,7 @@ const createConfig = ({ typescript = true, react: useReact = true }) => {
 
       // Function call formatting
       '@stylistic/function-call-argument-newline': [ 'error', 'consistent' ],
-      '@stylistic/function-paren-newline': [ 'error', 'consistent' ],
+      '@stylistic/function-paren-newline': [ 'error', 'multiline' ],
 
       /**
        * TypeScript-specific Formatting Rules
