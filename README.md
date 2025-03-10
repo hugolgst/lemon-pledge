@@ -8,6 +8,8 @@ A shareable ESLint configuration that leverages TypeScript, React, and [Stylisti
 npm i lemon-pledge
 ```
 
+<br/>
+
 ```js
 import lemonPledge from 'lemon-pledge'
 export default [
