@@ -8,7 +8,7 @@ A shareable ESLint configuration that leverages TypeScript, React, and [Stylisti
 npm i lemon-pledge
 ```
 
-<br/>
+<br/><br/>
 
 ```js
 import lemonPledge from 'lemon-pledge'
@@ -21,7 +21,7 @@ export default [
 ]
 ```
 
-## Features
+### Features
 
 - **React**: Includes [`eslint-plugin-react`](https://github.com/jsx-eslint/eslint-plugin-react) and [`react-hooks`](https://www.npmjs.com/package/eslint-plugin-react-hooks).
 - **TypeScript**: Integrates [`@typescript-eslint/eslint-plugin`](https://github.com/typescript-eslint/typescript-eslint/tree/main/packages/eslint-plugin) for type-safe linting.
